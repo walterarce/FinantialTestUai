@@ -1,0 +1,10 @@
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\bin\Debug\FinantialTestUai.exe.config
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\bin\Debug\FinantialTestUai.exe
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\bin\Debug\FinantialTestUai.pdb
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csprojAssemblyReference.cache
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.Form1.resources
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.Properties.Resources.resources
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csproj.GenerateResource.cache
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csproj.CoreCompileInputs.cache
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.exe
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.pdb
