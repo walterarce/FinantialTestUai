@@ -11,15 +11,15 @@ namespace FinantialTestUai.Entities
        
         public List<Cliente> Clientes { get; set; } = new List<Cliente>();
         public List<Tarjeta> Tarjeta { get; set; } = new List<Tarjeta>();
-        public void Inicializar(Cliente cliente)
+        
+
+        public void AgregarCliente(Cliente cl)
         {
-            agregar_cliente(cliente);
+            Clientes.Add(new Cliente(cl.Nombre,cl.Apellido,cl.TipoDoc,cl.NroDocumento));
         }
-
-        private void agregar_cliente(Cliente cl)
+        public void AgregarTarjeta(string tipotarjeta)
         {
-
-            Clientes.Add(new Cliente(cl.Nombre, cl.Apellido,"DNI",0));
+            Tarjeta.Add(new Tarjeta(tipotarjeta));
         }
     }
    

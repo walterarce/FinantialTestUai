@@ -26,8 +26,8 @@ namespace FinantialTestUai
         {
             //por cada click agrego un nuevo cliente.
             var cliente = new Cliente( txtNombre.Text,  txtApellido.Text,"DNI", Int32.Parse(NroDocumento.Text) );
-            entidadFinanciera.Clientes.Add(cliente);
-
+           
+            entidadFinanciera.AgregarCliente(cliente);
             grillaClientes.DataSource = null;
             grillaClientes.DataSource = entidadFinanciera.Clientes;
 
@@ -35,7 +35,7 @@ namespace FinantialTestUai
 
         private void btnGenerarNro_Click(object sender, EventArgs e)
         {
-            entidadFinanciera.Tarjeta.Add(new Tarjeta("9999"));
+            entidadFinanciera.AgregarTarjeta(cboTipoTarjeta.ValueMember);
             grillaTarjetas.DataSource = null;
             grillaTarjetas.DataSource = entidadFinanciera.Tarjeta;
 
@@ -63,15 +63,15 @@ namespace FinantialTestUai
             grillaTarjetasCliente.MultiSelect = false;
 
             grillaClientes.DataSource = null;
-            grillaClientes.DataSource = CargarClientes();
-
+          
+            
             grillaTarjetas.DataSource = null;
             
         }
 
         private List<Cliente> CargarClientes()
         {
-            entidadFinanciera.Clientes.Add(new Cliente(txtNombre.Text,txtApellido.Text, "DNI", 0));
+            //entidadFinanciera.Clientes.Add(new Cliente(txtNombre.Text,txtApellido.Text, "DNI", 0));
 
             string[] nombre1 = { "Alba", "Felipa", "Eusebio", "Farid", "Donald", "Alvaro", "Nicolás","Walter" };
             string[] apellido1 = { "Ruiz", "Sarmiento", "Uribe", "Maduro", "Trump", "Toledo", "Herrera" };
@@ -80,9 +80,10 @@ namespace FinantialTestUai
             var listaclientes = from n1 in nombre1
                 from n2 in nombre2
                 from a1 in apellido1
-                select new Cliente  { Nombre = $"{n1}, {n2} ", Apellido = $"{a1}" , TipoDoc = "DNI", NroDocumento = Int32.Parse(GenerarDNI()) };
+                select new Cliente  { Nombre = $"{n1}, {n2} ", Apellido = $"{a1}" , TipoDoc = "DNI", NroDocumento = 0 };
 
-            return listaclientes.Take(2).ToList();
+           
+            return listaclientes.Take(15).ToList();
         }
         private string GenerarDNI()
         {
@@ -122,10 +123,22 @@ namespace FinantialTestUai
                 grillaTarjetasCliente.DataSource = null;
                 grillaTarjetasCliente.DataSource = ((Cliente)grillaClientes.SelectedRows[0].DataBoundItem).RetornarTarjeta();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show(ex.Message);
+                
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Atencion solo es para fines de prueba la lista actual sera reemplazada");
+            entidadFinanciera.Clientes = CargarClientes();
+            foreach (var cliente in entidadFinanciera.Clientes)
+            {
+                cliente.NroDocumento = Int32.Parse( GenerarDNI());
+            }
+            grillaClientes.DataSource = null;
+            grillaClientes.DataSource = entidadFinanciera.Clientes;
         }
     }
 }
