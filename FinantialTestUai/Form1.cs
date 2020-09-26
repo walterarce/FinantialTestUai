@@ -140,5 +140,38 @@ namespace FinantialTestUai
             grillaClientes.DataSource = null;
             grillaClientes.DataSource = entidadFinanciera.Clientes;
         }
+
+        private void btnConsumoPesos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmconsumo.ActiveForm.Show();
+                Cliente cli = (Cliente)(grillaClientes.SelectedRows[0].DataBoundItem);
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cliente cli = (Cliente)(grillaClientes.SelectedRows[0].DataBoundItem);
+                Tarjeta tar = (Tarjeta)(grillaTarjetas.SelectedRows[0].DataBoundItem);
+                cli.DesvinculoTarjeta(cli,tar);
+
+                grillaTarjetasCliente.DataSource = null;
+                grillaTarjetasCliente.DataSource = cli.RetornarTarjeta();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
     }
 }

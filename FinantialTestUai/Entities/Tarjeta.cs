@@ -34,13 +34,10 @@ namespace FinantialTestUai.Entities
                          Random seed = new Random(DateTime.Now.Millisecond);
             DateTime lst = new DateTime();
                      
-                               // Obtenemos el intervalo de tiempo
-                               TimeSpan interval = dateEnd.Subtract(dateInit);
-                                // Se calcula el número de días
+                              
+            TimeSpan interval = dateEnd.Subtract(dateInit);
                                  int randomMax = (int)interval.TotalDays;
-                               // Se obtiene un número aleatorio
                                long randomValue = seed.Next(0, randomMax);
-                            // Se le añade a la fecha inicial
                             lst= dateInit.AddDays(randomValue);
                        
                     return lst;

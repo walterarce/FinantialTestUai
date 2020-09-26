@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace FinantialTestUai.Entities
 {
-    class TarjetaPlatinum : Tarjeta
+    public enum Tarjeta_Tipo
     {
-        public TarjetaPlatinum(string nrotipotarjeta) : base(nrotipotarjeta)
-        {
-        }
+        Platinum,
+        Gold,
+        Plata
     }
 }

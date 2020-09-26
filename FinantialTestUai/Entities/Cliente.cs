@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FinantialTestUai.Entities
 {
@@ -48,6 +49,20 @@ namespace FinantialTestUai.Entities
             {
                 Console.WriteLine(e);
                 throw;
+            }
+        }
+        public void DesvinculoTarjeta(Cliente cliente, Tarjeta tarjeta)
+        {
+            try
+            {
+                if (tarjeta.GetCliente() == cliente)
+                {
+                    tarjeta.SetTitular(null);
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
         public List<Tarjeta> RetornarTarjeta()

@@ -102,12 +102,12 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button1.Location = new System.Drawing.Point(695, 31);
+            this.button1.Location = new System.Drawing.Point(608, 31);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 39);
+            this.button1.Size = new System.Drawing.Size(184, 39);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Vincular";
+            this.button1.Text = "Vincular Tarjeta";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -188,17 +188,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1003, 47);
+            this.label5.Location = new System.Drawing.Point(1155, 44);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 20);
+            this.label5.Size = new System.Drawing.Size(88, 20);
             this.label5.TabIndex = 15;
-            this.label5.Text = "NroTarjeta";
+            this.label5.Text = "TipoTarjeta";
             // 
             // btnGenerarNro
             // 
             this.btnGenerarNro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnGenerarNro.Location = new System.Drawing.Point(1282, 35);
+            this.btnGenerarNro.Location = new System.Drawing.Point(1459, 35);
             this.btnGenerarNro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGenerarNro.Name = "btnGenerarNro";
             this.btnGenerarNro.Size = new System.Drawing.Size(177, 35);
@@ -214,7 +214,7 @@
             "Platinum",
             "Gold",
             "Plata"});
-            this.cboTipoTarjeta.Location = new System.Drawing.Point(1094, 39);
+            this.cboTipoTarjeta.Location = new System.Drawing.Point(1262, 39);
             this.cboTipoTarjeta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboTipoTarjeta.Name = "cboTipoTarjeta";
             this.cboTipoTarjeta.Size = new System.Drawing.Size(180, 28);
@@ -223,12 +223,13 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Location = new System.Drawing.Point(566, 31);
+            this.button2.Location = new System.Drawing.Point(824, 33);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 37);
+            this.button2.Size = new System.Drawing.Size(185, 37);
             this.button2.TabIndex = 19;
-            this.button2.Text = "Desvincular";
+            this.button2.Text = "Desvincular Tarjeta";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label6
             // 
@@ -251,7 +252,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(832, 50);
+            this.label8.Location = new System.Drawing.Point(1015, 47);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(126, 20);
             this.label8.TabIndex = 21;
@@ -303,14 +304,15 @@
             this.btnConsumoPesos.TabIndex = 25;
             this.btnConsumoPesos.Text = "$ Consumo Pesos";
             this.btnConsumoPesos.UseVisualStyleBackColor = true;
+            this.btnConsumoPesos.Click += new System.EventHandler(this.btnConsumoPesos_Click);
             // 
             // btnConsumoDolares
             // 
             this.btnConsumoDolares.Location = new System.Drawing.Point(867, 314);
             this.btnConsumoDolares.Name = "btnConsumoDolares";
-            this.btnConsumoDolares.Size = new System.Drawing.Size(166, 45);
+            this.btnConsumoDolares.Size = new System.Drawing.Size(214, 45);
             this.btnConsumoDolares.TabIndex = 25;
-            this.btnConsumoDolares.Text = "U$S Consumo Dolares";
+            this.btnConsumoDolares.Text = "Consumo Dolares U$S";
             this.btnConsumoDolares.UseVisualStyleBackColor = true;
             // 
             // Form1

@@ -17,3 +17,4 @@ C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\Fina
 C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csproj.CoreCompileInputs.cache
 C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.exe
 C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.pdb
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.frmconsumo.resources
