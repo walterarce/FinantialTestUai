@@ -10,18 +10,14 @@
   <Class Name="FinantialTestUai.Entities.Tarjeta">
     <Position X="3.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAACAAAQABAAAIIAQAAAGABAIgAAAQAAAAAIAA=</HashCode>
+      <HashCode>AAQAAAAACAAAQABAAAIIAAAAAGAAAIAAAAQAAAAAIAA=</HashCode>
       <FileName>Entities\Tarjeta.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Limite" />
-      <Property Name="Pago" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="FinantialTestUai.Entities.Cliente">
     <Position X="3.5" Y="5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAAAAAAAEAAAAiAAAAAAAABACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAACAAAAAAAEAAAQiAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Cliente.cs</FileName>
     </TypeIdentifier>
   </Class>

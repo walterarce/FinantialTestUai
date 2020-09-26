@@ -52,23 +52,24 @@
             // grillaClientes
             // 
             this.grillaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaClientes.Location = new System.Drawing.Point(47, 113);
+            this.grillaClientes.Location = new System.Drawing.Point(19, 49);
             this.grillaClientes.Name = "grillaClientes";
-            this.grillaClientes.Size = new System.Drawing.Size(240, 150);
+            this.grillaClientes.Size = new System.Drawing.Size(381, 150);
             this.grillaClientes.TabIndex = 0;
+            this.grillaClientes.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaClientes_RowEnter);
             // 
             // grillaTarjetas
             // 
             this.grillaTarjetas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaTarjetas.Location = new System.Drawing.Point(406, 113);
+            this.grillaTarjetas.Location = new System.Drawing.Point(435, 49);
             this.grillaTarjetas.Name = "grillaTarjetas";
-            this.grillaTarjetas.Size = new System.Drawing.Size(240, 150);
+            this.grillaTarjetas.Size = new System.Drawing.Size(434, 150);
             this.grillaTarjetas.TabIndex = 1;
             // 
             // grillaTarjetasCliente
             // 
             this.grillaTarjetasCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaTarjetasCliente.Location = new System.Drawing.Point(779, 113);
+            this.grillaTarjetasCliente.Location = new System.Drawing.Point(899, 49);
             this.grillaTarjetasCliente.Name = "grillaTarjetasCliente";
             this.grillaTarjetasCliente.Size = new System.Drawing.Size(240, 150);
             this.grillaTarjetasCliente.TabIndex = 2;

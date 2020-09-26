@@ -13,17 +13,35 @@ namespace FinantialTestUai.Entities
         public string TipoDoc { get; set; }
         public int NroDocumento { get; set; }
 
-       
+        List<Tarjeta> ListaTarjetas;
+        public Cliente(string nombre, string apellido, string tipo, int nro)
+        {
+            Nombre = nombre;
+            Apellido = apellido;
+            tipo = TipoDoc;
+            NroDocumento = nro;
+            ListaTarjetas = new List<Tarjeta>();
+            
+        }
 
-        public List<Tarjeta> ListaTarjetas { get; set; } = new List<Tarjeta>();
-
+        public Cliente()
+        {
+            ListaTarjetas = new List<Tarjeta>();
+        }
         public void AgregarTarjeta(Tarjeta tarjeta)
         {
             try
             {
                 if (tarjeta.GetCliente() == null)
                 {
-                    //ListaTarjetas.Add();
+                    ListaTarjetas.Add(new Tarjeta(tarjeta.NroTarjeta,tarjeta.Titular,tarjeta.FechaOtorgamiento,tarjeta.FechaVencimiento));
+                    ListaTarjetas.Last<Tarjeta>().SetTitular(this);
+                    tarjeta.SetTitular(this);
+                }
+                else
+                {
+                    throw new Exception("Nro de tarjeta ya otorgado");
+
                 }
             }
             catch (Exception e)
@@ -32,15 +50,16 @@ namespace FinantialTestUai.Entities
                 throw;
             }
         }
-        public List<Tarjeta> OwnListCard()
+        public List<Tarjeta> RetornarTarjeta()
         {
-            List<Tarjeta> listaTarjetas = new List<Tarjeta>();
-            foreach (var tarjeta in ListaTarjetas)
-            {
-                listaTarjetas.Add(new Tarjeta(){NroTarjeta = tarjeta.NroTarjeta, Titular = tarjeta.Titular,FechaOtorgamiento = tarjeta.FechaOtorgamiento, FechaVencimiento = tarjeta.FechaVencimiento});//tengo que arreglarlo porque el tipo solamente no me sirve para esta forma de retorno
-            }
+            List<Tarjeta> lstTar = new List<Tarjeta>();
+           
 
-            return listaTarjetas;
+            foreach (var tar in ListaTarjetas)
+            {
+                lstTar.Add(new Tarjeta(tar.NroTarjeta, tar.Titular, tar.FechaOtorgamiento, tar.FechaVencimiento));
+            }
+            return lstTar;
         }
 
         public override string ToString()

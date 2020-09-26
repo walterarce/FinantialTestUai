@@ -25,8 +25,11 @@ namespace FinantialTestUai
         private void btnAddCliente_Click(object sender, EventArgs e)
         {
             //por cada click agrego un nuevo cliente.
-            var cliente = new Cliente() { Nombre = txtNombre.Text, Apellido = txtApellido.Text, NroDocumento = Int32.Parse(NroDocumento.Text) };
+            var cliente = new Cliente( txtNombre.Text,  txtApellido.Text,"DNI", Int32.Parse(NroDocumento.Text) );
             entidadFinanciera.Clientes.Add(cliente);
+
+            grillaClientes.DataSource = null;
+            grillaClientes.DataSource = entidadFinanciera.Clientes;
 
         }
 
@@ -49,19 +52,26 @@ namespace FinantialTestUai
             cboTipoTarjeta.ValueMember = "Value";
             cboTipoTarjeta.DisplayMember = "Key";
             cboTipoTarjeta.SelectedIndex = 0;
+
             grillaTarjetas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grillaTarjetas.MultiSelect = false;
+
             grillaClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grillaClientes.MultiSelect = false;
+
             grillaTarjetasCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grillaTarjetasCliente.MultiSelect = false;
+
             grillaClientes.DataSource = null;
             grillaClientes.DataSource = CargarClientes();
+
+            grillaTarjetas.DataSource = null;
+            
         }
 
         private List<Cliente> CargarClientes()
         {
-            entidadFinanciera.Clientes.Add(new Cliente(){Nombre = "Walter", Apellido = "Arce"});
+            entidadFinanciera.Clientes.Add(new Cliente(txtNombre.Text,txtApellido.Text, "DNI", 0));
 
             string[] nombre1 = { "Alba", "Felipa", "Eusebio", "Farid", "Donald", "Alvaro", "Nicolás","Walter" };
             string[] apellido1 = { "Ruiz", "Sarmiento", "Uribe", "Maduro", "Trump", "Toledo", "Herrera" };
@@ -72,7 +82,7 @@ namespace FinantialTestUai
                 from a1 in apellido1
                 select new Cliente  { Nombre = $"{n1}, {n2} ", Apellido = $"{a1}" , TipoDoc = "DNI", NroDocumento = Int32.Parse(GenerarDNI()) };
 
-            return listaclientes.Take(20).ToList();
+            return listaclientes.Take(2).ToList();
         }
         private string GenerarDNI()
         {
@@ -92,17 +102,29 @@ namespace FinantialTestUai
             {
                 Cliente cli = (Cliente) (grillaClientes.SelectedRows[0].DataBoundItem);
                 Tarjeta tar = (Tarjeta) (grillaTarjetas.SelectedRows[0].DataBoundItem);
-
-                tar.Titular = cli;
-                cli.ListaTarjetas.Add(tar);
+                cli.AgregarTarjeta(tar);
 
                 grillaTarjetasCliente.DataSource = null;
-                grillaTarjetasCliente.DataSource = cli.OwnListCard();
+                grillaTarjetasCliente.DataSource = cli.RetornarTarjeta();
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                Console.WriteLine(exception);
-                throw;
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+        private void grillaClientes_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {  //No se porque en un momento determinado el evento manejador dejo de responder y me lo sacaba de indice, tuve que eliminar el evento y volver a generarlo.
+                //creeria que alguna metadata del proyecto quedo mal y por lo cual no respondio, lo que no probe es limpiar la solucion.
+                grillaTarjetasCliente.DataSource = null;
+                grillaTarjetasCliente.DataSource = ((Cliente)grillaClientes.SelectedRows[0].DataBoundItem).RetornarTarjeta();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

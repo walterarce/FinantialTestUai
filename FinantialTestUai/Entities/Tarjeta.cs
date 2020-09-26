@@ -8,13 +8,13 @@ namespace FinantialTestUai.Entities
 {
     public class Tarjeta
     {
-        Random seed = new Random(DateTime.Now.Millisecond);
+        
         public Tarjeta(string nrotipotarjeta)
         {
             nrotarjeta = nrotipotarjeta + GeneraNroTarjeta();
             FechaOtorgamiento=DateTime.Now;
             FechaVencimiento = getDates(720,DateTime.Now, DateTime.Now.AddDays(2500));
-            Limite = new Limite() { TipoMoneda = 0, Monto = 1000f };
+            // Limite = new Limite() { TipoMoneda = 0, Monto = 1000f };
             
         }
 
@@ -22,9 +22,18 @@ namespace FinantialTestUai.Entities
         {
             
         }
+
+        public Tarjeta(string nrot, Cliente titular, DateTime fechaotorgamiento, DateTime fechavencimiento )
+        {
+            nrotarjeta = nrot;
+            Titular = titular;
+            FechaOtorgamiento = fechaotorgamiento;
+            FechaVencimiento = fechavencimiento;
+        }
         private DateTime getDates(int numDates, DateTime dateInit, DateTime dateEnd)
                      {
-                        DateTime lst = new DateTime();
+                         Random seed = new Random(DateTime.Now.Millisecond);
+            DateTime lst = new DateTime();
                      
                                // Obtenemos el intervalo de tiempo
                                TimeSpan interval = dateEnd.Subtract(dateInit);
@@ -39,7 +48,7 @@ namespace FinantialTestUai.Entities
                     }
         private TipoTarjeta tipotarjeta { get; set; }
 
-        private string nrotarjeta;
+        public string nrotarjeta;
 
         public string NroTarjeta
         {
@@ -59,7 +68,7 @@ namespace FinantialTestUai.Entities
         public DateTime FechaVencimiento { get; set; }
 
 
-        public List<Consumo> ListaMovimientos { get; set; }
+       // public List<Consumo> ListaMovimientos { get; set; }
 
         private string GeneraNroTarjeta()
         {
@@ -74,29 +83,29 @@ namespace FinantialTestUai.Entities
             return nrorandom;
         }
 
-        public Limite Limite
-        {
-            get => default;
-            set
-            {
-               
-            }
-        }
+        // public Limite Limite
+        // {
+        //     get => default;
+        //     set
+        //     {
+        //        
+        //     }
+        // }
 
-        public Pago Pago
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        // public Pago Pago
+        // {
+        //     get => default;
+        //     set
+        //     {
+        //     }
+        // }
 
-        public List<Consumo> listaConsumo
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        // public List<Consumo> listaConsumo
+        // {
+        //     get => default;
+        //     set
+        //     {
+        //     }
+        // }
     }
 }

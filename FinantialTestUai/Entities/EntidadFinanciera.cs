@@ -19,7 +19,7 @@ namespace FinantialTestUai.Entities
         private void agregar_cliente(Cliente cl)
         {
 
-            Clientes.Add(new Cliente(){Apellido =cl.Nombre, Nombre = cl.Apellido});
+            Clientes.Add(new Cliente(cl.Nombre, cl.Apellido,"DNI",0));
         }
     }
    
