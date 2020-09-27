@@ -1,23 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+
 
 namespace FinantialTestUai.Entities
 {
     public class Tarjeta
     {
-         List<Consumo> ListaConsumos;
+        
+
+      
+        public delegate void ManipulacionCampoValorEventHandler();
+        public event ManipulacionCampoValorEventHandler LimitePesos;
+        protected virtual void OnValorCambio()
+        {
+            if (LimitePesos != null)
+            {
+                LimitePesos();
+            }
+            else
+            {
+                Console.WriteLine("Evento: El estado del campo `valor` ha cambiado.");
+            }
+        }
+        public void EstablecerValor(decimal numero)
+        {
+            if (this.limite_pesos != numero)
+            {
+                this.limite_pesos = numero;
+                OnValorCambio();
+            }
+        }
+        List<Consumo> ListaConsumos;
         public Tarjeta(TipoTarjeta TTarjeta)
         {
-            Tipotarjeta = TTarjeta;
-            nrotarjeta = TTarjeta.prefijo + GeneraNroTarjeta();
-            FechaOtorgamiento = DateTime.Now;
-            FechaVencimiento = ObtenerFecha(720, DateTime.Now, DateTime.Now.AddDays(2500));
-            limite_pesos = 1000;
-            limite_dolares = 1000;
-            ListaConsumos = new List<Consumo>();
+            try
+            {
+                    Tipotarjeta = TTarjeta;
+                    nrotarjeta = TTarjeta.prefijo + GeneraNroTarjeta();
+                    FechaOtorgamiento = DateTime.Now;
+                    FechaVencimiento = ObtenerFecha(720, DateTime.Now, DateTime.Now.AddDays(2500));
+                    limite_dolares = TTarjeta.limite_dolares;
+                    limite_pesos = TTarjeta.limite_pesos;
+                    ListaConsumos = new List<Consumo>();
+               
+                
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+          
         }
 
 
@@ -32,18 +66,7 @@ namespace FinantialTestUai.Entities
             ListaConsumos = new List<Consumo>();
         }
 
-        private DateTime ObtenerFecha(int numDates, DateTime dateInit, DateTime dateEnd)
-        {
-            Random seed = new Random(DateTime.Now.Millisecond);
-            DateTime lst = new DateTime();
-            TimeSpan interval = dateEnd.Subtract(dateInit);
-            int randomMax = (int) interval.TotalDays;
-            long randomValue = seed.Next(0, randomMax);
-            lst = dateInit.AddDays(randomValue);
-
-            return lst;
-        }
-
+       
         private TipoTarjeta tipotarjeta;
 
         public TipoTarjeta Tipotarjeta
@@ -73,16 +96,23 @@ namespace FinantialTestUai.Entities
         }
 
 
-
         public DateTime FechaOtorgamiento { get; set; }
 
         public DateTime FechaVencimiento { get; set; }
 
         public void AgregaConsumo(Consumo consumo)
-        {
+        {//metodo que agrega el consumo aceptado
             try
             {
                 ListaConsumos.Add(new Consumo(consumo.Monto, consumo.TipoMoneda));
+                if (consumo.TipoMoneda == Moneda.Pesos)
+                {
+                    saldo_pesos += saldo_pesos + consumo.Monto;
+                }
+                else
+                {
+                    saldo_dolares += saldo_dolares + consumo.Monto;
+                }
             }
             catch (Exception e)
             {
@@ -91,26 +121,46 @@ namespace FinantialTestUai.Entities
             }
         }
 
-        private decimal saldo_pesos { get; set; }
-
-        private decimal saldo_dolares { get; set; }
+        public decimal saldo_pesos { get; set; }
+        public decimal saldo_dolares { get; set; }
+        public decimal limite_pesos { get; set; }
+        public decimal limite_dolares { get; set; }
 
         public void AgregaPago(Pago pago)
-        {
+        {//metodo que agrega el pago
             if (pago.TipoMoneda == Moneda.Pesos)
             {
-                saldo_pesos -= (pago.Monto - (this.tipotarjeta.comision_pago_pesos*pago.Monto));
-                limite_pesos += pago.Monto;
+                var porcentaje = (this.tipotarjeta.comision_pago_pesos* pago.Monto)/100;
+                saldo_pesos -= (pago.Monto - porcentaje);
+                if((limite_pesos + (pago.Monto - porcentaje)> this.Tipotarjeta.limite_pesos))
+                {
+                    EstablecerValor(this.limite_pesos);
+                    limite_pesos = this.Tipotarjeta.limite_pesos;
+                }
+                else
+                {
+                    limite_pesos += (pago.Monto - porcentaje);
+                }
+              
             }
             else
             {
-                saldo_dolares -= (pago.Monto - (this.tipotarjeta.comision_pago_dolares * pago.Monto));
-                limite_dolares += pago.Monto;
+                var porcentaje = (this.tipotarjeta.comision_pago_dolares * pago.Monto)/100;
+                saldo_dolares -= (pago.Monto - porcentaje);
+                if ((limite_dolares + (pago.Monto - porcentaje) > this.Tipotarjeta.limite_dolares))
+                {
+                    limite_dolares = this.Tipotarjeta.limite_dolares;
+                }
+                else
+                {
+                    limite_dolares += (pago.Monto - porcentaje);
+                }
+                
             }
 
         }
         public List<Consumo> RetornarConsumos()
-        {
+        {//metodo que devuelve la lista de consumos dado que los voy incorporando en una lista simil resumen de movimientos de la tarjeta
             List<Consumo> listaConsumos = new List<Consumo>();
 
 
@@ -122,7 +172,8 @@ namespace FinantialTestUai.Entities
         }
 
         private string GeneraNroTarjeta()
-        {
+        {//este metodo es el que me genera random los 12 digitos restantes de una tarjeta, aseguro tener pocas probabilidades que se repitan en 
+            //la carga 
             Random rnd = new Random();
             string nrorandom = "";
             for (int i = 0; i < 12; i++)
@@ -134,10 +185,17 @@ namespace FinantialTestUai.Entities
             return nrorandom;
         }
 
-        public decimal limite_pesos { get; set; }
-        public decimal limite_dolares { get; set; }
+        private DateTime ObtenerFecha(int numDates, DateTime dateInit, DateTime dateEnd)
+        {//metodo que me permite obtener diferentes fechas aleatorias
+            Random seed = new Random(DateTime.Now.Millisecond);
+            DateTime lst = new DateTime();
+            TimeSpan interval = dateEnd.Subtract(dateInit);
+            int randomMax = (int)interval.TotalDays;
+            long randomValue = seed.Next(0, randomMax);
+            lst = dateInit.AddDays(randomValue);
 
-
+            return lst;
+        }
 
         public override string ToString()
         {

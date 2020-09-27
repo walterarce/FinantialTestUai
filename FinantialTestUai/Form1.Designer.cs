@@ -59,6 +59,7 @@
             this.txtMontoPago = new System.Windows.Forms.TextBox();
             this.btnConsumoDolar = new System.Windows.Forms.Button();
             this.btnPagoDolares = new System.Windows.Forms.Button();
+            this.btnSaldoLimite = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaTarjetas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaTarjetasCliente)).BeginInit();
@@ -369,12 +370,23 @@
             this.btnPagoDolares.UseVisualStyleBackColor = true;
             this.btnPagoDolares.Click += new System.EventHandler(this.btnPagoDolares_Click);
             // 
+            // btnSaldoLimite
+            // 
+            this.btnSaldoLimite.Location = new System.Drawing.Point(227, 506);
+            this.btnSaldoLimite.Name = "btnSaldoLimite";
+            this.btnSaldoLimite.Size = new System.Drawing.Size(147, 66);
+            this.btnSaldoLimite.TabIndex = 34;
+            this.btnSaldoLimite.Text = "Ver Saldo y Limite de Tarjeta Seleccionada";
+            this.btnSaldoLimite.UseVisualStyleBackColor = true;
+            this.btnSaldoLimite.Click += new System.EventHandler(this.btnSaldoLimite_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1198, 649);
+            this.Controls.Add(this.btnSaldoLimite);
             this.Controls.Add(this.btnPagoDolares);
             this.Controls.Add(this.btnConsumoDolar);
             this.Controls.Add(this.txtMontoPago);
@@ -443,6 +455,7 @@
         private System.Windows.Forms.TextBox txtMontoPago;
         private System.Windows.Forms.Button btnConsumoDolar;
         private System.Windows.Forms.Button btnPagoDolares;
+        private System.Windows.Forms.Button btnSaldoLimite;
     }
 }
 

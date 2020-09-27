@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace FinantialTestUai.Entities
 {
     public class TipoTarjeta
@@ -19,5 +14,9 @@ namespace FinantialTestUai.Entities
         {
             return nombretarjeta;
         }
+        public decimal limite_pesos { get; set; }
+        public decimal limite_dolares { get; set; }
+
+
     }
 }

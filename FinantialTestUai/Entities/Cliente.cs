@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace FinantialTestUai.Entities
 {
@@ -31,7 +28,7 @@ namespace FinantialTestUai.Entities
             ListaTarjetas = new List<Tarjeta>();
         }
         public void AgregarTarjeta(Tarjeta tarjeta)
-        {
+        {//Permite agregar una tarjeta a un cliente/titular seleccionado en la grilla 1 , valido que la misma ya no haya sido asignada a otro
             try
             {
                 if (tarjeta.GetCliente() == null)
