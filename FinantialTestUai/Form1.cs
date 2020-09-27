@@ -15,6 +15,7 @@ namespace FinantialTestUai
     {
         //Instancio el objeto que contiene clientes y tarjetas Entidad Financiera
         EntidadFinanciera entidadFinanciera = new EntidadFinanciera();
+     
         public Form1()
         {
             InitializeComponent();
@@ -25,9 +26,9 @@ namespace FinantialTestUai
         private void btnAddCliente_Click(object sender, EventArgs e)
         {
             //por cada click agrego un nuevo cliente.
-            var cliente = new Cliente( txtNombre.Text,  txtApellido.Text,"DNI", Int32.Parse(NroDocumento.Text) );
-            entidadFinanciera.Clientes.Add(cliente);
-
+            var cliente = new Cliente( txtNombre.Text,  txtApellido.Text,cboTipoDoc.SelectedItem.ToString(), Int32.Parse(NroDocumento.Text) );
+           
+            entidadFinanciera.AgregarCliente(cliente);
             grillaClientes.DataSource = null;
             grillaClientes.DataSource = entidadFinanciera.Clientes;
 
@@ -35,67 +36,47 @@ namespace FinantialTestUai
 
         private void btnGenerarNro_Click(object sender, EventArgs e)
         {
-            entidadFinanciera.Tarjeta.Add(new Tarjeta("9999"));
-            grillaTarjetas.DataSource = null;
-            grillaTarjetas.DataSource = entidadFinanciera.Tarjeta;
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            var cbotipotarjetavalores = new BindingList<KeyValuePair<TipoTarjeta,int>>();
-            cbotipotarjetavalores.Add(new KeyValuePair<TipoTarjeta, int>(TipoTarjeta.Platinum,9999));
-            cbotipotarjetavalores.Add(new KeyValuePair<TipoTarjeta, int>(TipoTarjeta.Gold, 8888));
-            cbotipotarjetavalores.Add(new KeyValuePair<TipoTarjeta, int>(TipoTarjeta.Plata, 7777));
-
-            cboTipoTarjeta.DataSource = cbotipotarjetavalores;
-            cboTipoTarjeta.ValueMember = "Value";
-            cboTipoTarjeta.DisplayMember = "Key";
-            cboTipoTarjeta.SelectedIndex = 0;
-
-            grillaTarjetas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grillaTarjetas.MultiSelect = false;
-
-            grillaClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grillaClientes.MultiSelect = false;
-
-            grillaTarjetasCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grillaTarjetasCliente.MultiSelect = false;
-
-            grillaClientes.DataSource = null;
-            grillaClientes.DataSource = CargarClientes();
-
-            grillaTarjetas.DataSource = null;
+            try
+            {
+                entidadFinanciera.AgregarTarjeta((TipoTarjeta)cboTipoTarjeta.SelectedItem);
+                grillaTarjetas.DataSource = null;
+                grillaTarjetas.DataSource = entidadFinanciera.Tarjetas;
+            }
+            catch (Exception )
+            {
+               
+            }
+            
             
         }
 
-        private List<Cliente> CargarClientes()
-        {
-            entidadFinanciera.Clientes.Add(new Cliente(txtNombre.Text,txtApellido.Text, "DNI", 0));
+        private void Form1_Load(object sender, EventArgs e)
+        {  
+           entidadFinanciera.GenerarTiposTarjeta();
 
-            string[] nombre1 = { "Alba", "Felipa", "Eusebio", "Farid", "Donald", "Alvaro", "Nicolás","Walter" };
-            string[] apellido1 = { "Ruiz", "Sarmiento", "Uribe", "Maduro", "Trump", "Toledo", "Herrera" };
-            string[] nombre2 = {  "Anabel", "Rick", "Murty", "Silvana", "Diomedes", "Nicomedes", "Teodoro" };
+           foreach (var tipotarjeta in entidadFinanciera.TiposTarjetas)
+           {
+               cboTipoTarjeta.Items.Add(tipotarjeta);
+           }
+
+           cboTipoDoc.Items.Add(TipoDocumento.DNI);
+            cboTipoDoc.Items.Add(TipoDocumento.LE);
+            cboTipoDoc.Items.Add(TipoDocumento.PASAPORTE);
+            grillaTarjetas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grillaTarjetas.MultiSelect = false;
+            grillaClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grillaClientes.MultiSelect = false;
+            grillaTarjetasCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grillaTarjetasCliente.MultiSelect = false;
+            grillaClientes.DataSource = null;
           
-            var listaclientes = from n1 in nombre1
-                from n2 in nombre2
-                from a1 in apellido1
-                select new Cliente  { Nombre = $"{n1}, {n2} ", Apellido = $"{a1}" , TipoDoc = "DNI", NroDocumento = Int32.Parse(GenerarDNI()) };
-
-            return listaclientes.Take(2).ToList();
+            
+            grillaTarjetas.DataSource = null;
+          
         }
-        private string GenerarDNI()
-        {
-            Random rnd = new Random();
-            string nrorandom = "";
-            for (int i = 0; i < 8; i++)
-            {
-                int numeroazar = rnd.Next(0, 9);
-                nrorandom = nrorandom + numeroazar.ToString();
-            }
 
-            return nrorandom;
-        }
+        
+        
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -117,15 +98,138 @@ namespace FinantialTestUai
         private void grillaClientes_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             try
-            {  //No se porque en un momento determinado el evento manejador dejo de responder y me lo sacaba de indice, tuve que eliminar el evento y volver a generarlo.
-                //creeria que alguna metadata del proyecto quedo mal y por lo cual no respondio, lo que no probe es limpiar la solucion.
+            { 
+                List<Tarjeta> lisTarjeta = entidadFinanciera.Tarjetas.FindAll(x => x.Titular == ((Cliente) grillaClientes.SelectedRows[0].DataBoundItem)).ToList();
+                
                 grillaTarjetasCliente.DataSource = null;
-                grillaTarjetasCliente.DataSource = ((Cliente)grillaClientes.SelectedRows[0].DataBoundItem).RetornarTarjeta();
+                grillaTarjetasCliente.DataSource = lisTarjeta;
+                
+            }
+            catch (Exception )
+            {
+                
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            if (entidadFinanciera.Clientes!=null)
+            {
+               entidadFinanciera.Clientes.AddRange( entidadFinanciera.CargarClientes());
+            }
+            else
+            {
+                entidadFinanciera.Clientes = entidadFinanciera.CargarClientes();
+            }
+            
+          
+            grillaClientes.DataSource = null;
+            grillaClientes.DataSource = entidadFinanciera.Clientes;
+        }
+
+        private void actualiza_grilla_consumos()
+        {
+            try
+            {
+                Tarjeta tarjetaseleccionada = ((Tarjeta)grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
+                List<Tarjeta> lisTarjeta = entidadFinanciera.Tarjetas.FindAll(x => x.Titular == ((Cliente)grillaClientes.SelectedRows[0].DataBoundItem)).ToList();
+                List<Consumo> consumos = new List<Consumo>();
+                foreach (var tarjeta in lisTarjeta)
+                {
+                    if (tarjeta.Titular == ((Cliente)grillaClientes.SelectedRows[0].DataBoundItem) && tarjeta.NroTarjeta == tarjetaseleccionada.NroTarjeta)
+                        consumos = tarjeta.RetornarConsumos();
+                }
+                grillaMovimientos.DataSource = null;
+                grillaMovimientos.DataSource = consumos;
+            }
+            catch (Exception )
+            {
+               
+            }
+            
+        }
+        private void btnConsumoPesos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+                Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
+                Consumo monto = new Consumo(decimal.Parse(txtMontoConsumo.Text), Moneda.Pesos);
+               entidadFinanciera.AceptarConsumo(monto,tar);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cliente cli = (Cliente)(grillaClientes.SelectedRows[0].DataBoundItem);
+                Tarjeta tar = (Tarjeta)(grillaTarjetas.SelectedRows[0].DataBoundItem);
+
+                foreach (var tarjeta in cli.RetornarTarjeta())
+                {
+                    if (tarjeta.NroTarjeta == tar.NroTarjeta)
+                    {
+                        entidadFinanciera.EliminarTarjeta(tar);
+                    }
+                }
+
+                grillaTarjetasCliente.DataSource = null;
+                grillaTarjetasCliente.DataSource = cli.RetornarTarjeta();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+        private void btnConsumoDolar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
+                Consumo monto = new Consumo(decimal.Parse(txtMontoConsumo.Text), Moneda.Dolares);
+                entidadFinanciera.AceptarConsumo(monto, tar);
+          
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void grillaTarjetasCliente_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            actualiza_grilla_consumos();
+        }
+
+        private void grillaTarjetasCliente_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            grillaMovimientos.DataSource = null;
+        }
+
+        private void btnPago_Click(object sender, EventArgs e)
+        {
+            Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
+            Pago pago = new Pago(decimal.Parse(txtMontoPago.Text), Moneda.Pesos);
+            entidadFinanciera.AceptarPago(pago,tar);
+        }
+
+        private void btnPagoDolares_Click(object sender, EventArgs e)
+        {
+            Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
+            Pago pago = new Pago(decimal.Parse(txtMontoPago.Text), Moneda.Pesos);
+            entidadFinanciera.AceptarPago(pago,tar);
         }
     }
 }

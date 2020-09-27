@@ -8,8 +8,8 @@ namespace FinantialTestUai.Entities
 {
     public enum TipoDocumento
     {
-        dni,
-        le,
-        pasaporte
+        DNI,
+        LE,
+        PASAPORTE
     }
 }

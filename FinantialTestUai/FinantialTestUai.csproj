@@ -49,13 +49,9 @@
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Consumo.cs" />
     <Compile Include="Entities\EntidadFinanciera.cs" />
-    <Compile Include="Entities\Limite.cs" />
     <Compile Include="Entities\Moneda.cs" />
     <Compile Include="Entities\Pago.cs" />
     <Compile Include="Entities\Tarjeta.cs" />
-    <Compile Include="Entities\TarjetaGold.cs" />
-    <Compile Include="Entities\TarjetaPlata.cs" />
-    <Compile Include="Entities\TarjetaPlatinum.cs" />
     <Compile Include="Entities\TipoDocumento.cs" />
     <Compile Include="Entities\TipoTarjeta.cs" />
     <Compile Include="Form1.cs">

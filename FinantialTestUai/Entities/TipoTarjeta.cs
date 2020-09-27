@@ -6,10 +6,18 @@ using System.Threading.Tasks;
 
 namespace FinantialTestUai.Entities
 {
-    public enum TipoTarjeta
+    public class TipoTarjeta
     {
-        Platinum=9999,
-        Gold=8888,
-        Plata=7777
+        public string nombretarjeta { get; set; }
+
+        public string prefijo { get; set; }
+        public decimal comision_pago_pesos { get; set; }
+
+        public decimal comision_pago_dolares { get; set; }
+
+        public override string ToString()
+        {
+            return nombretarjeta;
+        }
     }
 }

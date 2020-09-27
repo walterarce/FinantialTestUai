@@ -8,47 +8,51 @@ namespace FinantialTestUai.Entities
 {
     public class Tarjeta
     {
-        
-        public Tarjeta(string nrotipotarjeta)
+         List<Consumo> ListaConsumos;
+        public Tarjeta(TipoTarjeta TTarjeta)
         {
-            nrotarjeta = nrotipotarjeta + GeneraNroTarjeta();
-            FechaOtorgamiento=DateTime.Now;
-            FechaVencimiento = getDates(720,DateTime.Now, DateTime.Now.AddDays(2500));
-            // Limite = new Limite() { TipoMoneda = 0, Monto = 1000f };
-            
+            Tipotarjeta = TTarjeta;
+            nrotarjeta = TTarjeta.prefijo + GeneraNroTarjeta();
+            FechaOtorgamiento = DateTime.Now;
+            FechaVencimiento = ObtenerFecha(720, DateTime.Now, DateTime.Now.AddDays(2500));
+            limite_pesos = 1000;
+            limite_dolares = 1000;
+            ListaConsumos = new List<Consumo>();
         }
 
-        public Tarjeta()
-        {
-            
-        }
 
-        public Tarjeta(string nrot, Cliente titular, DateTime fechaotorgamiento, DateTime fechavencimiento )
+      
+        public Tarjeta(string nrot, Cliente titular, DateTime fechaotorgamiento, DateTime fechavencimiento, TipoTarjeta TTarjeta)
         {
             nrotarjeta = nrot;
             Titular = titular;
             FechaOtorgamiento = fechaotorgamiento;
             FechaVencimiento = fechavencimiento;
+            Tipotarjeta = TTarjeta;
+            ListaConsumos = new List<Consumo>();
         }
-        private DateTime getDates(int numDates, DateTime dateInit, DateTime dateEnd)
-                     {
-                         Random seed = new Random(DateTime.Now.Millisecond);
-            DateTime lst = new DateTime();
-                     
-                               // Obtenemos el intervalo de tiempo
-                               TimeSpan interval = dateEnd.Subtract(dateInit);
-                                // Se calcula el número de días
-                                 int randomMax = (int)interval.TotalDays;
-                               // Se obtiene un número aleatorio
-                               long randomValue = seed.Next(0, randomMax);
-                            // Se le añade a la fecha inicial
-                            lst= dateInit.AddDays(randomValue);
-                       
-                    return lst;
-                    }
-        private TipoTarjeta tipotarjeta { get; set; }
 
-        public string nrotarjeta;
+        private DateTime ObtenerFecha(int numDates, DateTime dateInit, DateTime dateEnd)
+        {
+            Random seed = new Random(DateTime.Now.Millisecond);
+            DateTime lst = new DateTime();
+            TimeSpan interval = dateEnd.Subtract(dateInit);
+            int randomMax = (int) interval.TotalDays;
+            long randomValue = seed.Next(0, randomMax);
+            lst = dateInit.AddDays(randomValue);
+
+            return lst;
+        }
+
+        private TipoTarjeta tipotarjeta;
+
+        public TipoTarjeta Tipotarjeta
+        {
+            get { return tipotarjeta; }
+            set { tipotarjeta = value; }
+        }
+
+        private string nrotarjeta;
 
         public string NroTarjeta
         {
@@ -56,19 +60,66 @@ namespace FinantialTestUai.Entities
             set { nrotarjeta = value; }
         }
 
-        public Cliente GetCliente() { return Titular; }
+        public Cliente GetCliente()
+        {
+            return Titular;
+        }
+
         public Cliente Titular { get; set; }
 
         public void SetTitular(Cliente cliente)
         {
             Titular = cliente;
         }
+
+
+
         public DateTime FechaOtorgamiento { get; set; }
 
         public DateTime FechaVencimiento { get; set; }
 
+        public void AgregaConsumo(Consumo consumo)
+        {
+            try
+            {
+                ListaConsumos.Add(new Consumo(consumo.Monto, consumo.TipoMoneda));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
-       // public List<Consumo> ListaMovimientos { get; set; }
+        private decimal saldo_pesos { get; set; }
+
+        private decimal saldo_dolares { get; set; }
+
+        public void AgregaPago(Pago pago)
+        {
+            if (pago.TipoMoneda == Moneda.Pesos)
+            {
+                saldo_pesos -= (pago.Monto - (this.tipotarjeta.comision_pago_pesos*pago.Monto));
+                limite_pesos += pago.Monto;
+            }
+            else
+            {
+                saldo_dolares -= (pago.Monto - (this.tipotarjeta.comision_pago_dolares * pago.Monto));
+                limite_dolares += pago.Monto;
+            }
+
+        }
+        public List<Consumo> RetornarConsumos()
+        {
+            List<Consumo> listaConsumos = new List<Consumo>();
+
+
+            foreach (var consumo in ListaConsumos)
+            {
+                listaConsumos.Add(new Consumo(consumo.Monto, consumo.TipoMoneda));
+            }
+            return listaConsumos;
+        }
 
         private string GeneraNroTarjeta()
         {
@@ -83,29 +134,14 @@ namespace FinantialTestUai.Entities
             return nrorandom;
         }
 
-        // public Limite Limite
-        // {
-        //     get => default;
-        //     set
-        //     {
-        //        
-        //     }
-        // }
+        public decimal limite_pesos { get; set; }
+        public decimal limite_dolares { get; set; }
 
-        // public Pago Pago
-        // {
-        //     get => default;
-        //     set
-        //     {
-        //     }
-        // }
 
-        // public List<Consumo> listaConsumo
-        // {
-        //     get => default;
-        //     set
-        //     {
-        //     }
-        // }
+
+        public override string ToString()
+        {
+            return tipotarjeta.ToString();
+        }
     }
 }

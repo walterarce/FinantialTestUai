@@ -7,3 +7,15 @@ C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\De
 C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csproj.CoreCompileInputs.cache
 C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.exe
 C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.pdb
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\bin\Debug\FinantialTestUai.exe.config
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\bin\Debug\FinantialTestUai.exe
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\bin\Debug\FinantialTestUai.pdb
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csprojAssemblyReference.cache
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.Form1.resources
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.Properties.Resources.resources
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csproj.GenerateResource.cache
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csproj.CoreCompileInputs.cache
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.exe
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.pdb
+C:\Users\walte\Documents\platzi\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.frmconsumo.resources
+C:\Users\WalterJavier.Arce\source\repos\FinantialTestUai\FinantialTestUai\obj\Debug\FinantialTestUai.csprojAssemblyReference.cache

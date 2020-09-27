@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FinantialTestUai.Entities
 {
@@ -18,7 +20,7 @@ namespace FinantialTestUai.Entities
         {
             Nombre = nombre;
             Apellido = apellido;
-            tipo = TipoDoc;
+            TipoDoc = tipo;
             NroDocumento = nro;
             ListaTarjetas = new List<Tarjeta>();
             
@@ -34,7 +36,7 @@ namespace FinantialTestUai.Entities
             {
                 if (tarjeta.GetCliente() == null)
                 {
-                    ListaTarjetas.Add(new Tarjeta(tarjeta.NroTarjeta,tarjeta.Titular,tarjeta.FechaOtorgamiento,tarjeta.FechaVencimiento));
+                    ListaTarjetas.Add(new Tarjeta(tarjeta.NroTarjeta,tarjeta.Titular,tarjeta.FechaOtorgamiento,tarjeta.FechaVencimiento,tarjeta.Tipotarjeta));
                     ListaTarjetas.Last<Tarjeta>().SetTitular(this);
                     tarjeta.SetTitular(this);
                 }
@@ -50,6 +52,21 @@ namespace FinantialTestUai.Entities
                 throw;
             }
         }
+        public void DesvinculoTarjeta(Cliente cliente, Tarjeta tarjeta)
+        {
+            try
+            {
+                if (tarjeta.GetCliente() == cliente)
+                {
+                    tarjeta.SetTitular(null);
+                    cliente.ListaTarjetas.Remove(tarjeta);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
         public List<Tarjeta> RetornarTarjeta()
         {
             List<Tarjeta> lstTar = new List<Tarjeta>();
@@ -57,7 +74,7 @@ namespace FinantialTestUai.Entities
 
             foreach (var tar in ListaTarjetas)
             {
-                lstTar.Add(new Tarjeta(tar.NroTarjeta, tar.Titular, tar.FechaOtorgamiento, tar.FechaVencimiento));
+                lstTar.Add(new Tarjeta(tar.NroTarjeta, tar.Titular, tar.FechaOtorgamiento, tar.FechaVencimiento,tar.Tipotarjeta));
             }
             return lstTar;
         }

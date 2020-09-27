@@ -1,70 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="FinantialTestUai.Entities.EntidadFinanciera">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAABAAAAQAAA=</HashCode>
+      <HashCode>IAAQAAACAABAABAAAABQAAAAAEBEAAAAAABAAAAAAAQ=</HashCode>
       <FileName>Entities\EntidadFinanciera.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinantialTestUai.Entities.Tarjeta">
-    <Position X="3.5" Y="0.5" Width="2.25" />
+    <Position X="3.5" Y="1" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAACAAAQABAAAIIAAAAAGAAAIAAAAQAAAAAIAA=</HashCode>
+      <HashCode>AAQAAACACIQAAABEAAIMABAAgEIAAIAAAAQEgAQAIAA=</HashCode>
       <FileName>Entities\Tarjeta.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinantialTestUai.Entities.Cliente">
-    <Position X="3.5" Y="5" Width="2.25" />
+    <Position X="8.25" Y="3.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAAAAAAAEAAAQiAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAACAAAAAAAEAAAAiAAAAAgAAAACAAAAAAAQAAA=</HashCode>
       <FileName>Entities\Cliente.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FinantialTestUai.Entities.TarjetaGold" Collapsed="true">
-    <Position X="7.5" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\TarjetaGold.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinantialTestUai.Entities.TarjetaPlata" Collapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\TarjetaPlata.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinantialTestUai.Entities.TarjetaPlatinum" Collapsed="true">
-    <Position X="7.5" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\TarjetaPlatinum.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="FinantialTestUai.Entities.Consumo">
-    <Position X="1.25" Y="4.75" Width="2" />
+    <Position X="0.5" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>IAAAAAAAAAAAAAEAAAAAAAAIAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Entities\Consumo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FinantialTestUai.Entities.Limite">
-    <Position X="7.75" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Limite.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="FinantialTestUai.Entities.Pago">
-    <Position X="7.75" Y="4.75" Width="1.5" />
+    <Position X="2.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Pago.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="FinantialTestUai.Entities.TipoTarjeta">
+    <Position X="6" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAABEAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\TipoTarjeta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Enum Name="FinantialTestUai.Entities.Moneda">
-    <Position X="10.25" Y="2.5" Width="1.5" />
+    <Position X="6.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Moneda.cs</FileName>
