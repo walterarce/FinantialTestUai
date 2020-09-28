@@ -10,10 +10,10 @@ namespace FinantialTestUai.Entities
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string TipoDoc { get; set; }
-        public int NroDocumento { get; set; }
+        public string NroDocumento { get; set; }
 
         List<Tarjeta> ListaTarjetas;
-        public Cliente(string nombre, string apellido, string tipo, int nro)
+        public Cliente(string nombre, string apellido, string tipo, string nro)
         {
             Nombre = nombre;
             Apellido = apellido;
@@ -49,33 +49,19 @@ namespace FinantialTestUai.Entities
                 throw;
             }
         }
-        public void DesvinculoTarjeta(Cliente cliente, Tarjeta tarjeta)
-        {
-            try
-            {
-                if (tarjeta.GetCliente() == cliente)
-                {
-                    tarjeta.SetTitular(null);
-                    cliente.ListaTarjetas.Remove(tarjeta);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-        }
+      
         public List<Tarjeta> RetornarTarjeta()
-        {
+        {//metodo que retorna las tarjetas del cliente
             List<Tarjeta> lstTar = new List<Tarjeta>();
            
 
             foreach (var tar in ListaTarjetas)
             {
-                lstTar.Add(new Tarjeta(tar.NroTarjeta, tar.Titular, tar.FechaOtorgamiento, tar.FechaVencimiento,tar.Tipotarjeta));
+                lstTar.Add(new Tarjeta(tar.NroTarjeta, tar.FechaOtorgamiento, tar.FechaVencimiento));
             }
             return lstTar;
         }
-
+        
         public override string ToString()
         {
             return $"{Nombre} , {Apellido}";

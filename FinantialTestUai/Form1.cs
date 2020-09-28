@@ -29,7 +29,7 @@ namespace FinantialTestUai
                 if (txtNombre.Text != "" && txtApellido.Text !="" && cboTipoDoc.SelectedItem !=null && NroDocumento.Text!="")
                 {
                 var cliente = new Cliente(txtNombre.Text, txtApellido.Text, cboTipoDoc.SelectedItem.ToString(), 
-                    Int32.Parse(NroDocumento.Text));
+                    NroDocumento.Text);
 
                 entidadFinanciera.AgregarCliente(cliente);
                 }
@@ -52,10 +52,13 @@ namespace FinantialTestUai
         {//metodo que genera las tarjetas de credito para la entidad dependiendo del tipo seleccionado en el combo de tipo tarjeta
             try
             {
-
-                entidadFinanciera.AgregarTarjeta((TipoTarjeta)cboTipoTarjeta.SelectedItem);
-                grillaTarjetas.DataSource = null;
-                grillaTarjetas.DataSource = entidadFinanciera.Tarjetas;
+                if (cboTipoTarjeta.SelectedItem!=null)
+                {
+                    entidadFinanciera.AgregarTarjeta((TipoTarjeta)cboTipoTarjeta.SelectedItem);
+                    grillaTarjetas.DataSource = null;
+                    grillaTarjetas.DataSource = entidadFinanciera.Tarjetas;
+                }
+                
             }
             catch (Exception ex)
             {
@@ -135,11 +138,11 @@ namespace FinantialTestUai
         {//realizo la carga masiva de clientes/titulares para la entidad financiera
             if (entidadFinanciera.Clientes!=null)
             {
-               entidadFinanciera.Clientes.AddRange( entidadFinanciera.CargarClientes());
+               entidadFinanciera.Clientes.AddRange( entidadFinanciera.CargarClientes(5));
             }
             else
             {
-                entidadFinanciera.Clientes = entidadFinanciera.CargarClientes();
+                entidadFinanciera.Clientes = entidadFinanciera.CargarClientes(5);
             }
             
           
@@ -150,8 +153,9 @@ namespace FinantialTestUai
         private void actualiza_grilla_tarjetas()
         {
             Cliente cli = (Cliente)(grillaClientes.SelectedRows[0].DataBoundItem);
+           
             grillaTarjetasCliente.DataSource = null;
-            grillaTarjetasCliente.DataSource = cli.RetornarTarjeta();
+            grillaTarjetasCliente.DataSource = entidadFinanciera.Tarjetas.Find(x => x.Titular==cli);
         }
         private void actualiza_grilla_consumos()
         {//genero un metodo que me actualiza la grilla 4 de consumos, si bien esta por fuera de lo solicitado me sirvio visualmente.
@@ -167,6 +171,7 @@ namespace FinantialTestUai
                 }
                 grillaMovimientos.DataSource = null;
                 grillaMovimientos.DataSource = consumos;
+                actualiza_grilla_tarjetas();
             }
             catch (Exception )
             {
@@ -175,22 +180,29 @@ namespace FinantialTestUai
             
         }
         private void btnConsumoPesos_Click(object sender, EventArgs e)
-        {//metodo que dispara la aceptacion de consumo en pesos de la entidad financiera y termina en la invocacion de agregar consumo de tarjeta
+        {
+
+            //metodo que dispara la aceptacion de consumo en pesos de la entidad financiera y termina en la invocacion de agregar consumo de tarjeta
             try
             {
-                
+
                 Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
                 Consumo monto = new Consumo(decimal.Parse(txtMontoConsumo.Text), Moneda.Pesos);
-                entidadFinanciera.Verificar_Limite_Pesos(tar,monto);
-                entidadFinanciera.AceptarConsumo(monto,tar);
+                entidadFinanciera.Advertir_Pesos += ExcesoLimite_Advertir;
+
+                entidadFinanciera.Verificar_Limite_Pesos(tar, monto);
+                entidadFinanciera.AceptarConsumo(monto, tar);
                 txtMontoConsumo.Text = "";
                 actualiza_grilla_tarjetas();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"Debe seleccionar un cliente en la grilla de cliente: {ex.Message} o ingresar un valor de monto de consumo");
             }
+
         }
+
+  
         private void btnConsumoDolar_Click(object sender, EventArgs e)
         {//metodo que dispara la aceptacion de consumo en dolares de la entidad financiera y termina en la invocacion de agregar consumo de tarjeta
             try
@@ -198,20 +210,27 @@ namespace FinantialTestUai
 
                 Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
                 Consumo monto = new Consumo(decimal.Parse(txtMontoConsumo.Text), Moneda.Dolares);
+                entidadFinanciera.Advertir_Dolares += ExcesoLimite_Advertir;
+                entidadFinanciera.Verificar_Limite_Dolares(tar, monto);
                 entidadFinanciera.AceptarConsumo(monto, tar);
                 txtMontoConsumo.Text = "";
+                actualiza_grilla_tarjetas();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"Debe seleccionar un cliente en la grilla de cliente: {ex.Message} o ingresar un valor de monto de consumo");
             }
+        }
+        private void ExcesoLimite_Advertir(string mensaje)
+        {
+            MessageBox.Show(mensaje);
         }
         private void button2_Click(object sender, EventArgs e)
         {//metodo para desvincular la tarjeta
             try
             {
                 Cliente cli = (Cliente)(grillaClientes.SelectedRows[0].DataBoundItem);
-                Tarjeta tar = (Tarjeta)(grillaTarjetas.SelectedRows[0].DataBoundItem);
+                Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
                 foreach (var tarjeta in entidadFinanciera.Tarjetas)
                 {
                     if (tarjeta.NroTarjeta== tar.NroTarjeta)
@@ -219,9 +238,6 @@ namespace FinantialTestUai
                         entidadFinanciera.EliminarTarjeta(tarjeta);
                     }
                 }
-               
-
-              
 
                 grillaTarjetasCliente.DataSource = null;
                 grillaTarjetasCliente.DataSource = cli.RetornarTarjeta();
@@ -229,7 +245,7 @@ namespace FinantialTestUai
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"Debe seleccionar un cliente en la grilla de cliente: {ex.Message} esto le mostrara las tarjetas en la grilla 3");
 
             }
         }
@@ -252,6 +268,7 @@ namespace FinantialTestUai
                 Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
                 Pago pago = new Pago(decimal.Parse(txtMontoPago.Text), Moneda.Pesos);
                 entidadFinanciera.AceptarPago(pago, tar);
+                actualiza_grilla_tarjetas();
             }
             catch (Exception ex)
             {
@@ -267,6 +284,7 @@ namespace FinantialTestUai
                 Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
                 Pago pago = new Pago(decimal.Parse(txtMontoPago.Text), Moneda.Pesos);
                 entidadFinanciera.AceptarPago(pago, tar);
+                actualiza_grilla_tarjetas();
             }
             catch (Exception ex)
             {
@@ -277,15 +295,23 @@ namespace FinantialTestUai
 
         private void btnSaldoLimite_Click(object sender, EventArgs e)
         {//metodo que permite visualizar saldos y limites de la tarjeta que tengo seleccionada en grilla 3
-            Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
-            foreach (var tarjeta in entidadFinanciera.Tarjetas)
+            try
             {
-                if (tarjeta.NroTarjeta==tar.NroTarjeta)
+                Tarjeta tar = (Tarjeta)(grillaTarjetasCliente.SelectedRows[0].DataBoundItem);
+                foreach (var tarjeta in entidadFinanciera.Tarjetas)
                 {
-                    MessageBox.Show(
-                        $"El Saldo en pesos es:{tarjeta.saldo_pesos} , el limite en pesos es: {tarjeta.limite_pesos}, el Saldo en dolares es:{tarjeta.saldo_dolares}, el limite en dolares es:{tarjeta.limite_dolares}");
+                    if (tarjeta.NroTarjeta == tar.NroTarjeta)
+                    {
+                        MessageBox.Show(
+                            $"El Saldo en pesos es:{tarjeta.saldo_pesos} , el limite en pesos es: {tarjeta.limite_pesos}, el Saldo en dolares es:{tarjeta.saldo_dolares}, el limite en dolares es:{tarjeta.limite_dolares}");
+                    }
                 }
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+          
         }
     }
 }

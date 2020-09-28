@@ -10,27 +10,6 @@ namespace FinantialTestUai.Entities
         
 
       
-        public delegate void ManipulacionCampoValorEventHandler();
-        public event ManipulacionCampoValorEventHandler LimitePesos;
-        protected virtual void OnValorCambio()
-        {
-            if (LimitePesos != null)
-            {
-                LimitePesos();
-            }
-            else
-            {
-                Console.WriteLine("Evento: El estado del campo `valor` ha cambiado.");
-            }
-        }
-        public void EstablecerValor(decimal numero)
-        {
-            if (this.limite_pesos != numero)
-            {
-                this.limite_pesos = numero;
-                OnValorCambio();
-            }
-        }
         List<Consumo> ListaConsumos;
         public Tarjeta(TipoTarjeta TTarjeta)
         {
@@ -66,7 +45,15 @@ namespace FinantialTestUai.Entities
             ListaConsumos = new List<Consumo>();
         }
 
-       
+
+        public Tarjeta(string nrot, DateTime fechaotorgamiento, DateTime fechavencimiento)
+        {
+            nrotarjeta = nrot;
+            FechaOtorgamiento = fechaotorgamiento;
+            FechaVencimiento = fechavencimiento;
+            ListaConsumos = new List<Consumo>();
+        }
+
         private TipoTarjeta tipotarjeta;
 
         public TipoTarjeta Tipotarjeta
@@ -134,7 +121,6 @@ namespace FinantialTestUai.Entities
                 saldo_pesos -= (pago.Monto - porcentaje);
                 if((limite_pesos + (pago.Monto - porcentaje)> this.Tipotarjeta.limite_pesos))
                 {
-                    EstablecerValor(this.limite_pesos);
                     limite_pesos = this.Tipotarjeta.limite_pesos;
                 }
                 else

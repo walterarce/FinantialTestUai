@@ -60,18 +60,23 @@
             this.btnConsumoDolar = new System.Windows.Forms.Button();
             this.btnPagoDolares = new System.Windows.Forms.Button();
             this.btnSaldoLimite = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.grillaClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaTarjetas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaTarjetasCliente)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaMovimientos)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // grillaClientes
             // 
             this.grillaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaClientes.Location = new System.Drawing.Point(12, 85);
+            this.grillaClientes.Location = new System.Drawing.Point(12, 57);
             this.grillaClientes.Name = "grillaClientes";
             this.grillaClientes.RowHeadersWidth = 62;
             this.grillaClientes.Size = new System.Drawing.Size(519, 150);
@@ -81,7 +86,7 @@
             // grillaTarjetas
             // 
             this.grillaTarjetas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaTarjetas.Location = new System.Drawing.Point(583, 85);
+            this.grillaTarjetas.Location = new System.Drawing.Point(583, 57);
             this.grillaTarjetas.Name = "grillaTarjetas";
             this.grillaTarjetas.RowHeadersWidth = 62;
             this.grillaTarjetas.Size = new System.Drawing.Size(603, 150);
@@ -90,10 +95,10 @@
             // grillaTarjetasCliente
             // 
             this.grillaTarjetasCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaTarjetasCliente.Location = new System.Drawing.Point(390, 336);
+            this.grillaTarjetasCliente.Location = new System.Drawing.Point(268, 238);
             this.grillaTarjetasCliente.Name = "grillaTarjetasCliente";
             this.grillaTarjetasCliente.RowHeadersWidth = 62;
-            this.grillaTarjetasCliente.Size = new System.Drawing.Size(603, 150);
+            this.grillaTarjetasCliente.Size = new System.Drawing.Size(647, 150);
             this.grillaTarjetasCliente.TabIndex = 2;
             this.grillaTarjetasCliente.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaTarjetasCliente_RowEnter);
             this.grillaTarjetasCliente.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaTarjetasCliente_RowLeave);
@@ -109,11 +114,11 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button1.Location = new System.Drawing.Point(408, 56);
+            this.button1.Location = new System.Drawing.Point(408, 22);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(123, 25);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Vincular Tarjeta";
+            this.button1.Text = "Vincular Tarjeta ->";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -214,12 +219,12 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Location = new System.Drawing.Point(678, 59);
+            this.button2.Location = new System.Drawing.Point(583, 22);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 24);
             this.button2.TabIndex = 19;
-            this.button2.Text = "Desvincular Tarjeta";
+            this.button2.Text = "<- Desvincular Tarjeta";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -236,7 +241,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 65);
+            this.label7.Location = new System.Drawing.Point(6, 47);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 13);
@@ -246,7 +251,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(580, 64);
+            this.label8.Location = new System.Drawing.Point(580, 48);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(85, 13);
@@ -256,7 +261,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(395, 319);
+            this.label9.Location = new System.Drawing.Point(265, 222);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(98, 13);
@@ -266,7 +271,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.button3.Location = new System.Drawing.Point(129, 59);
+            this.button3.Location = new System.Drawing.Point(129, 31);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(110, 23);
@@ -286,7 +291,7 @@
             this.groupBox1.Controls.Add(this.NroDocumento);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnAddCliente);
-            this.groupBox1.Location = new System.Drawing.Point(64, 303);
+            this.groupBox1.Location = new System.Drawing.Point(12, 243);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -297,7 +302,7 @@
             // 
             // btnConsumoPesos
             // 
-            this.btnConsumoPesos.Location = new System.Drawing.Point(516, 303);
+            this.btnConsumoPesos.Location = new System.Drawing.Point(5, 34);
             this.btnConsumoPesos.Margin = new System.Windows.Forms.Padding(2);
             this.btnConsumoPesos.Name = "btnConsumoPesos";
             this.btnConsumoPesos.Size = new System.Drawing.Size(111, 29);
@@ -308,7 +313,7 @@
             // 
             // txtMontoConsumo
             // 
-            this.txtMontoConsumo.Location = new System.Drawing.Point(784, 308);
+            this.txtMontoConsumo.Location = new System.Drawing.Point(85, 68);
             this.txtMontoConsumo.Name = "txtMontoConsumo";
             this.txtMontoConsumo.Size = new System.Drawing.Size(100, 20);
             this.txtMontoConsumo.TabIndex = 26;
@@ -318,7 +323,7 @@
             this.groupBox2.Controls.Add(this.btnGenerarNro);
             this.groupBox2.Controls.Add(this.cboTipoTarjeta);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(848, 30);
+            this.groupBox2.Location = new System.Drawing.Point(848, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(302, 49);
             this.groupBox2.TabIndex = 27;
@@ -328,14 +333,14 @@
             // grillaMovimientos
             // 
             this.grillaMovimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaMovimientos.Location = new System.Drawing.Point(390, 492);
+            this.grillaMovimientos.Location = new System.Drawing.Point(268, 417);
             this.grillaMovimientos.Name = "grillaMovimientos";
-            this.grillaMovimientos.Size = new System.Drawing.Size(606, 150);
+            this.grillaMovimientos.Size = new System.Drawing.Size(647, 150);
             this.grillaMovimientos.TabIndex = 28;
             // 
             // btnPago
             // 
-            this.btnPago.Location = new System.Drawing.Point(999, 353);
+            this.btnPago.Location = new System.Drawing.Point(14, 31);
             this.btnPago.Name = "btnPago";
             this.btnPago.Size = new System.Drawing.Size(75, 23);
             this.btnPago.TabIndex = 30;
@@ -345,14 +350,14 @@
             // 
             // txtMontoPago
             // 
-            this.txtMontoPago.Location = new System.Drawing.Point(1034, 383);
+            this.txtMontoPago.Location = new System.Drawing.Point(49, 61);
             this.txtMontoPago.Name = "txtMontoPago";
             this.txtMontoPago.Size = new System.Drawing.Size(100, 20);
             this.txtMontoPago.TabIndex = 31;
             // 
             // btnConsumoDolar
             // 
-            this.btnConsumoDolar.Location = new System.Drawing.Point(632, 303);
+            this.btnConsumoDolar.Location = new System.Drawing.Point(121, 33);
             this.btnConsumoDolar.Name = "btnConsumoDolar";
             this.btnConsumoDolar.Size = new System.Drawing.Size(128, 29);
             this.btnConsumoDolar.TabIndex = 32;
@@ -362,7 +367,7 @@
             // 
             // btnPagoDolares
             // 
-            this.btnPagoDolares.Location = new System.Drawing.Point(1080, 353);
+            this.btnPagoDolares.Location = new System.Drawing.Point(95, 31);
             this.btnPagoDolares.Name = "btnPagoDolares";
             this.btnPagoDolares.Size = new System.Drawing.Size(97, 23);
             this.btnPagoDolares.TabIndex = 33;
@@ -372,7 +377,7 @@
             // 
             // btnSaldoLimite
             // 
-            this.btnSaldoLimite.Location = new System.Drawing.Point(227, 506);
+            this.btnSaldoLimite.Location = new System.Drawing.Point(105, 476);
             this.btnSaldoLimite.Name = "btnSaldoLimite";
             this.btnSaldoLimite.Size = new System.Drawing.Size(147, 66);
             this.btnSaldoLimite.TabIndex = 34;
@@ -380,21 +385,51 @@
             this.btnSaldoLimite.UseVisualStyleBackColor = true;
             this.btnSaldoLimite.Click += new System.EventHandler(this.btnSaldoLimite_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(268, 395);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Consumos por tarjeta";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnConsumoPesos);
+            this.groupBox3.Controls.Add(this.txtMontoConsumo);
+            this.groupBox3.Controls.Add(this.btnConsumoDolar);
+            this.groupBox3.Location = new System.Drawing.Point(921, 235);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(265, 100);
+            this.groupBox3.TabIndex = 36;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Adm de Consumos";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnPagoDolares);
+            this.groupBox4.Controls.Add(this.btnPago);
+            this.groupBox4.Controls.Add(this.txtMontoPago);
+            this.groupBox4.Location = new System.Drawing.Point(926, 341);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(236, 100);
+            this.groupBox4.TabIndex = 37;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Adm de Pagos";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1198, 649);
+            this.ClientSize = new System.Drawing.Size(1198, 579);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.btnSaldoLimite);
-            this.Controls.Add(this.btnPagoDolares);
-            this.Controls.Add(this.btnConsumoDolar);
-            this.Controls.Add(this.txtMontoPago);
-            this.Controls.Add(this.btnPago);
             this.Controls.Add(this.grillaMovimientos);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.txtMontoConsumo);
-            this.Controls.Add(this.btnConsumoPesos);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label9);
@@ -417,6 +452,10 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaMovimientos)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,6 +495,9 @@
         private System.Windows.Forms.Button btnConsumoDolar;
         private System.Windows.Forms.Button btnPagoDolares;
         private System.Windows.Forms.Button btnSaldoLimite;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 
